@@ -56,7 +56,7 @@ public class StartFakeSMTPListener implements ServletContextListener {
 			// http://stackoverflow.com/questions/14165517/processbuilder-forwarding-stdout-and-stderr-of-started-processes-without-blocki
 			processBuilder.inheritIO();
 			// http://stackoverflow.com/questions/15178937/processbuilder-works-starting-jar-but-does-not-acknolwledge-jars-arguments
-			processBuilder.command("java",  "-jar", pathToLib, "--start-server", "--port", "2525", "--bind-address", "127.0.0.1", "--memory-mode");
+			processBuilder.command("java", "-jar", pathToLib, "--start-server", "--port", "2525", "--bind-address", "127.0.0.1", "--memory-mode");
 
 			process = processBuilder.start();
 		} catch (Exception e) {
