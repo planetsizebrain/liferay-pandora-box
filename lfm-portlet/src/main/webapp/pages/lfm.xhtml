@@ -30,8 +30,8 @@
 				<p:column style="width: 10% !important; text-align: right;">
 					<p:menuButton value="#{i18n['actions']}">
 						<p:menuitem value="#{i18n['button-download']}" action="#{lfm.download(file)}" ajax="false" rendered="#{not file.directory}" icon="fa fa-fw fa-download" />
-        				<p:menuitem value="#{i18n['button-edit']}" actionListener="#{lfm.edit(file)}" oncomplete="PF('editDialog').show();" process="@this" update="#{p:component('editDialog')}" rendered="#{not file.directory}" icon="fa fa-fw fa-edit" />
-						<p:menuitem value="#{i18n['button-delete']}" actionListener="#{lfm.delete(file)}" update="#{p:component('files')}" ajax="false" icon="fa fa-fw fa-remove" />
+        				<p:menuitem value="#{i18n['button-edit']}" actionListener="#{lfm.edit(file)}" oncomplete="PF('editDialog').show();" process="@this" update="#{p:component('editDialog')}" rendered="#{not file.directory and fn:hasPermission('EDIT_FILE')}" icon="fa fa-fw fa-edit" />
+						<p:menuitem value="#{i18n['button-delete']}" actionListener="#{lfm.delete(file)}" update="#{p:component('files')}" ajax="false" rendered="#{fn:hasPermission('DELETE_FILE_FOLDER')}" icon="fa fa-fw fa-remove" />
 						<p:menuitem value="#{i18n['button-touch']}" action="#{lfm.touch(file)}" update="#{p:component('files')}" ajax="false" rendered="#{not file.directory and fn:hasPermission('TOUCH')}" icon="fa fa-fw fa-hand-o-left" />
 					</p:menuButton>
 				</p:column>
