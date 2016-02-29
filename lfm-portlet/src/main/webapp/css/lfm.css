@@ -1,0 +1,35 @@
+.lfm-portlet .files tr[role='row'] {
+	height: 40px;
+}
+
+.lfm-portlet .directory {
+	overflow: hidden;
+	padding-left: 10px;
+}
+
+.aui .lfm-portlet .directory h3 {
+	float: left;
+	line-height: 25px;
+}
+
+.lfm-portlet .directory button.btn {
+	margin-top: 9px;
+	margin-left: 10px;
+}
+
+.lfm-portlet .ui-toolbar-group-right {
+	padding-top: 8px;
+	margin-right: 10px;
+}
+
+.ui-growl {
+	top: 50px !important;
+}
+
+.ui-menu.ui-widget .ui-menuitem-link .ui-menuitem-text {
+	margin-top: -2px !important;
+}
+
+.aui ul {
+	margin-left: 5px !important;
+}

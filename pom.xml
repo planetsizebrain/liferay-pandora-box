@@ -15,14 +15,21 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<version.jsf>2.2.12</version.jsf>
 		<version.jvm>1.8</version.jvm>
 		<version.liferay>6.2.1</version.liferay>
+		<version.liferay.faces>4.2.5-ga6</version.liferay.faces>
 		<version.logback>1.1.2</version.logback>
+		<version.primefaces>5.2</version.primefaces>
+		<version.primefaces.extensions>3.2.0</version.primefaces.extensions>
 		<version.slf4j>1.7.10</version.slf4j>
+		<version.spring>4.1.6.RELEASE</version.spring>
 	</properties>
 
 	<modules>
+		<module>common</module>
 		<module>fakesmtp-hook</module>
+		<module>lfm-portlet</module>
 	</modules>
 
 	<build>
@@ -58,6 +65,13 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Project -->
+			<dependency>
+				<groupId>be.planetsizebrain</groupId>
+				<artifactId>common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
 			<!-- Liferay -->
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
@@ -108,6 +122,92 @@
 				<artifactId>portlet-api</artifactId>
 	            <version>2.0</version>
 	            <scope>provided</scope>
+			</dependency>
+
+			<!-- JSF + Liferay Faces Bridge -->
+			<dependency>
+				<groupId>com.sun.faces</groupId>
+				<artifactId>jsf-api</artifactId>
+				<version>${version.jsf}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.faces</groupId>
+				<artifactId>jsf-impl</artifactId>
+				<version>${version.jsf}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.el</groupId>
+				<artifactId>el-api</artifactId>
+				<version>2.2</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.seam</groupId>
+				<artifactId>jboss-el</artifactId>
+				<version>2.0.0.GA</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>com.liferay.faces</groupId>
+				<artifactId>liferay-faces-bridge-impl</artifactId>
+				<version>${version.liferay.faces}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.liferay.faces</groupId>
+				<artifactId>liferay-faces-portal</artifactId>
+				<version>${version.liferay.faces}</version>
+			</dependency>
+
+			<!-- Primefaces -->
+			<dependency>
+				<groupId>org.primefaces</groupId>
+				<artifactId>primefaces</artifactId>
+				<version>${version.primefaces}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.primefaces.extensions</groupId>
+				<artifactId>primefaces-extensions</artifactId>
+				<version>${version.primefaces.extensions}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.primefaces.extensions</groupId>
+				<artifactId>resources-codemirror</artifactId>
+				<version>${version.primefaces.extensions}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.primefaces.themes</groupId>
+				<artifactId>bootstrap</artifactId>
+				<version>1.0.10</version>
+			</dependency>
+
+			<!-- CDI + Spring -->
+			<dependency>
+				<groupId>javax.inject</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+
+			<!-- Google -->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>18.0</version>
+			</dependency>
+
+			<!-- Apache Commons -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>1.3.1</version>
 			</dependency>
 
 			<!-- Logging -->

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:fn="http://planetsizebrain.be/functions">
+	<h:head>
+		<h:outputStylesheet library="primefaces-extensions" name="codemirror/mode/tiki.css" />
+	</h:head>
+	<h:body>
+		<h:form enctype="multipart/form-data" prependId="false">
+			<p:growl id="growl" life="3000" showDetail="true" widgetVar="growl" />
+
+			<h:messages globalOnly="true" />
+
+			<ui:include src="fragments/toolbar.xhtml" />
+
+			<p:dataTable id="files" value="#{lfm.currentDirectoryFiles}" var="file" class="files" emptyMessage="#{i18n['no-files-found']}">
+				<p:column headerText="#{i18n['file-name']}" sortBy="#{file.name}" style="width: 65% !important;">
+					<h:outputText value="#{file.name}" rendered="#{not file.directory}"/>
+					<h:commandLink actionListener="#{lfm.navigate(file)}" rendered="#{file.directory}">#{file.name}</h:commandLink>
+				</p:column>
+				<p:column headerText="#{i18n['file-size']}" sortBy="#{file.length()}" style="width: 10% !important; text-align: right;">
+					#{fn:toHumanReadableSize(file.length())}
+				</p:column>
+				<p:column headerText="#{i18n['file-date']}" sortBy="#{file.lastModified()}" style="width: 15% !important; text-align: right;">
+					#{fn:formatDate(file.lastModified())}
+				</p:column>
+				<p:column style="width: 10% !important; text-align: right;">
+					<p:menuButton value="#{i18n['actions']}">
+						<p:menuitem value="#{i18n['button-download']}" action="#{lfm.download(file)}" ajax="false" rendered="#{not file.directory}" icon="fa fa-fw fa-download" />
+        				<p:menuitem value="#{i18n['button-edit']}" actionListener="#{lfm.edit(file)}" oncomplete="PF('editDialog').show();" process="@this" update="#{p:component('editDialog')}" rendered="#{not file.directory}" icon="fa fa-fw fa-edit" />
+						<p:menuitem value="#{i18n['button-delete']}" actionListener="#{lfm.delete(file)}" update="#{p:component('files')}" ajax="false" icon="fa fa-fw fa-remove" />
+						<p:menuitem value="#{i18n['button-touch']}" action="#{lfm.touch(file)}" update="#{p:component('files')}" ajax="false" rendered="#{not file.directory and fn:hasPermission('TOUCH')}" icon="fa fa-fw fa-hand-o-left" />
+					</p:menuButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+		<h:form enctype="multipart/form-data" prependId="false" rendered="#{fn:hasPermission('UPLOAD')}">
+			<p:fileUpload fileUploadListener="#{lfm.handleUpload}" mode="advanced" multiple="false" update="#{p:component('files')}" />
+		</h:form>
+
+		<ui:include src="fragments/createDialog.xhtml" />
+		<ui:include src="fragments/editDialog.xhtml" />
+
+		<script>
+			// https://zenorocha.github.io/clipboard.js/
+			// http://stackoverflow.com/questions/25498449/show-growl-using-javascript
+			var clipboard = new Clipboard('.btn');
+
+			clipboard.on('success', function(e) {
+				PF('growl').renderMessage(
+						{
+							"summary" : "#{i18n['copy-path-to-clipboard']}",
+							"detail" : e.text,
+							"severity" : "info"
+						}
+				);
+
+				e.clearSelection();
+			});
+
+		</script>
+	</h:body>
+</f:view>

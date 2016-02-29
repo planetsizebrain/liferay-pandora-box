@@ -1,0 +1,18 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+		<p:dialog id="editDialog" header="#{lfm.selectedFile.name}" closable="true" widgetVar="editDialog" appendTo="@(body)" modal="true" height="365" width="800">
+		<h:form>
+			<div>
+				<pe:codeMirror id="codeMirror" mode="groovy" theme="eclipse" value="#{lfm.currentFile}" lineNumbers="true"/>
+			</div>
+			<hr />
+			<p:commandButton value="#{i18n['button-save']}" action="#{lfm.save()}" oncomplete="PF('editDialog').hide();" update="@form #{p:component('files')}" icon="fa fa-fw fa-save" />
+		</h:form>
+	</p:dialog>
+
+</ui:composition>

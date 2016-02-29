@@ -1,0 +1,19 @@
+<resource-action-mapping>
+	<portlet-resource>
+		<portlet-name>lfm</portlet-name>
+		<supports>
+			<action-key>ADD_FILE</action-key>
+			<action-key>ADD_FOLDER</action-key>
+			<action-key>TOUCH</action-key>
+			<action-key>UPLOAD</action-key>
+		</supports>
+		<site-member-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>ADD_FILE</action-key>
+			<action-key>ADD_FOLDER</action-key>
+			<action-key>TOUCH</action-key>
+			<action-key>UPLOAD</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+</resource-action-mapping>

@@ -1,0 +1,29 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://planetsizebrain.be/functions">
+
+	<p:toolbar>
+		<f:facet name="left">
+			<div class="directory">
+				<h3>#{i18n['current-path']}:
+					<p:commandLink action="#{lfm.changePath('[ROOT]')}" update="@form">[ROOT]</p:commandLink><span id="current-directory">
+						<c:forEach items="#{lfm.currentPathParts}" var="pathPart">/<p:commandLink action="#{lfm.changePath(pathPart)}" update="@form">#{pathPart}</p:commandLink></c:forEach>
+					</span>
+				</h3>
+				<button class="btn" data-clipboard-target="#current-directory" onclick="return false;" title="#{i18n['copy-path-to-clipboard']}"><i class="fa fa-fw fa-clipboard"></i></button>
+			</div>
+		</f:facet>
+
+		<f:facet name="right">
+			<p:menuButton value="#{i18n['add-new']}..." rendered="#{fn:hasPermission('ADD_FILE') or fn:hasPermission('ADD_FOLDER')}">
+				<p:menuitem value="#{i18n['file']}" actionListener="#{lfm.setNewFileIsFolder(false)}" oncomplete="PF('createDialog').show();" process="@this" update="#{p:component('createDialog')}" rendered="#{fn:hasPermission('ADD_FILE')}" icon="fa fa-fw fa-file-o" />
+				<p:menuitem value="#{i18n['folder']}" actionListener="#{lfm.setNewFileIsFolder(true)}" oncomplete="PF('createDialog').show();" update="#{p:component('createDialog')}" rendered="#{fn:hasPermission('ADD_FOLDER')}" icon="fa fa-fw fa-folder-o" />
+			</p:menuButton>
+		</f:facet>
+	</p:toolbar>
+
+</ui:composition>

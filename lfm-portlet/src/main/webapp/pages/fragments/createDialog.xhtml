@@ -1,0 +1,16 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog id="createDialog" header="#{lfm.newFileIsFolder ? i18n['create-new-folder'] : i18n['create-new-file']}" closable="true" widgetVar="createDialog" appendTo="@(body)" modal="true" height="90" width="300">
+		<h:form>
+			<p:outputLabel for="filename" value="#{i18n['file-name']}" />
+			<p:inputText id="filename" value="#{lfm.newFileName}" />
+
+			<p:commandButton value="#{i18n['button-save']}" action="#{lfm.create()}" oncomplete="PF('createDialog').hide();" update="@form #{p:component('files')}" icon="fa fa-fw fa-save" />
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
