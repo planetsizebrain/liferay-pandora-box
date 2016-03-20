@@ -1,0 +1,15 @@
+<resource-action-mapping>
+	<portlet-resource>
+		<portlet-name>crash</portlet-name>
+		<supports>
+			<action-key>CONFIGURATION</action-key>
+			<action-key>VIEW</action-key>
+		</supports>
+		<site-member-defaults />
+		<guest-defaults />
+		<guest-unsupported>
+			<action-key>CONFIGURATION</action-key>
+			<action-key>VIEW</action-key>
+		</guest-unsupported>
+	</portlet-resource>
+</resource-action-mapping>

@@ -1,0 +1,5 @@
+<Context antiJARLocking="true" antiResourceLocking="true">
+	<Loader loaderClass="com.liferay.support.tomcat.loader.PortalClassLoader" />
+	<!-- Disable session persistence -->
+	<Manager pathname="" />
+</Context>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="be.planetsizebrain.crash,be.planetsizebrain.common,org.crsh.lang.impl.java"/>
+
+	<bean class="org.crsh.spring.SpringWebBootstrap">
+		<property name="cmdMountPointConfig" value="classpath:/crash/commands/;war:/WEB-INF/crash/commands/;file:../../crash/"/>
+		<property name="confMountPointConfig" value="war:/WEB-INF/crash/"/>
+		<property name="config">
+		<props>
+			<!-- Turn on web integration -->
+			<prop key="crash.web.enabled">true</prop>
+
+			<!-- VFS configuration -->
+			<prop key="crash.vfs.refresh_period">1</prop>
+
+			<!-- SSH configuration -->
+			<prop key="crash.ssh.port">9999</prop>
+
+			<!-- Telnet configuration -->
+			<!--<prop key="crash.telnet.port">5000</prop>-->
+
+			<!-- Authentication configuration -->
+			<prop key="crash.auth">liferay</prop>
+
+			<!-- Email plugin -->
+			<prop key="crash.mail.smtp.from">jan.eerdekens@aca-it.be</prop>
+		</props>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<property name="scopes">
+			<map>
+				<entry key="view">
+					<bean class="be.planetsizebrain.common.jsf.ViewScope" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>

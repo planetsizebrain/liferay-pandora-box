@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+      	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+	</h:head>
+	<h:body>
+		<h:form enctype="multipart/form-data" prependId="false">
+			<h:messages globalOnly="true" />
+
+			<h:outputLabel for="console-size" value="#{i18n['crash-console-size']}"/>
+			<h:selectOneMenu id="console-size" value="#{preferences.selectedConsoleSize}" >
+				<f:selectItems value="#{preferences.consoleSizes}" var="consoleSize" itemValue="#{consoleSize}" itemLabel="#{consoleSize.label}" />
+			</h:selectOneMenu>
+
+			<h:commandButton actionListener="#{preferences.submit}" value="#{i18n['submit']}" />
+		</h:form>
+	</h:body>
+</f:view>
